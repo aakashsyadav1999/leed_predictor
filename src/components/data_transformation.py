@@ -80,6 +80,9 @@ class DataTransformation:
             #drop NA
             df.dropna(inplace=True)
 
+            #fill NA
+            df.fillna(0, inplace=True)
+
             return df
 
         except Exception as e:
