@@ -70,7 +70,7 @@ LABEL_ENCODER = [
 
 TARGET_ENCODING = [
                  
-                 'City'
+                 'City',
                  'ProjectName'
                  
                  ]
@@ -91,3 +91,7 @@ STANDARDSCALER = 'GrossFloorArea'
 MODEL_DIR = "MODEL_DIR"
 TRANSFORM_PICKLE_FILE_NAME = 'transformed_data.pkl'
 
+TRAIN_TEST_SET_DATA_LOCATION = "ModelTrainingArtifacts"
+
+
+#Model Building
