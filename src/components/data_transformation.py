@@ -1,15 +1,16 @@
 import pandas as pd
-import time
-import numpy as np
 from dataclasses import dataclass
 import os
 import stat
+import pickle
 
 from src.constants import *
 from src.entity.config_entity import DataTransformationConfig
 from src.logger import logging
 
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from category_encoders import TargetEncoder
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -79,37 +80,84 @@ class DataTransformation:
             #drop NA
             df.dropna(inplace=True)
 
-            self.transformed_data = df
+            return df
 
         except Exception as e:
             raise e
     
-    
-    def save_to_pickle(self, directory, file_name):
+
+    # Define the function for label encoding
+    def label_encode_columns(self,df):
+        
         try:
-            if self.transformed_data is None:
-                raise ValueError("No transformed data to save. Run seprating_data method first.")
+            
+            le = LabelEncoder()
+            
+            for column in self.data_transformation_config.label_encoder:
+                df[column] = le.fit_transform(df[column])
+            
+            return df
+                
+        except:
+            pass
 
-            # Create the directory if it doesn't exist
-            os.makedirs(directory, exist_ok=True)
+    # Target Encoding for high-cardinality features
+    def target_encode(self, df, columns, target_column):
 
-            # Construct the file path
-            file_path = os.path.join(directory, file_name)
+        try:
 
-            # Check if the directory is empty
-            if os.path.exists(directory):
-                # Delete all files in the directory
-                for file in os.listdir(directory):
-                    file_path = os.path.join(directory, file)
-                    os.remove(file_path)
+            for column in columns:
 
-            # Save the transformed DataFrame to pickle file
-            self.transformed_data.to_pickle(file_path)
-            logging.info(f"Transformed data saved to {file_path}")
+                encoder = TargetEncoder()
+                
+                df[column] = encoder.fit_transform(df[column], df[target_column])
+            
+            return df
+            
+        except Exception as e:
+            raise e
+        
+
+    def one_hot_encoding(self,df):
+
+        try:
+            
+            df = pd.get_dummies(
+                                    
+                                    df,
+                                    columns=self.data_transformation_config.one_hot_encoding,
+                                    dtype=int
+                                    
+                                    )
+            df_head = df.head()
+
+            return df
 
         except Exception as e:
             raise e
+        
+    def split_train_test_split(self,df):
+        
+        try:
+            
+            train,test = train_test_split(df,test_size=0.2,random_state=42)
+            
+            # Creating directories if they don't exist
+            os.makedirs(self.data_transformation_config.train_test_file_path, exist_ok=True)
 
+            # Saving train and test data to CSV files
+            train.to_csv(os.path.join(self.data_transformation_config.train_test_file_path, 'train.csv'), index=False)
+            test.to_csv(os.path.join(self.data_transformation_config.train_test_file_path, 'test.csv'), index=False)
+            
+            logging.info("Data splitted into train and test data.")
+            logging.info(f'Shape of train data is {train.shape}')
+            logging.info(f'Shape of test data is {test.shape}')
+        
+            return train, test
+        
+        except Exception as e:
+            raise e
+        
 
     #initiate all the methods which are mentioned above.
     def initiate_data_transformation(self):
@@ -126,10 +174,37 @@ class DataTransformation:
             df = self.read_csv()
 
             #seprating_data
-            self.seprating_data(df)
+            df_sep = self.seprating_data(df)
+            
+            #label encoder
+            df_label = self.label_encode_columns(df_sep)
 
-            #saving pickle file
-            self.save_to_pickle(self.data_transformation_config.model_dir,self.data_transformation_config.pickle_file_name)
+            #target encoding
+            df_encoded = self.target_encode(df_label,self.data_transformation_config.target_encoding,self.data_transformation_config.target_column)
+
+            #one-hot-encoding
+            df_final = self.one_hot_encoding(df_encoded)
+
+            #splitting data into train and test
+            self.split_train_test_split(df_final)
+
+            # Splitting data into train and test
+            train, test = self.split_train_test_split(df_final)
+
+            # Create a dictionary to store train and test arrays
+            data_dict = {"train": train.values, "test": test.values}
+
+            # Create the directory if it doesn't exist
+            os.makedirs(self.data_transformation_config.model_dir, exist_ok=True)
+
+            # Save the dictionary containing train and test arrays as a single pickle file
+            pickle_file_path = os.path.join(
+                self.data_transformation_config.model_dir, self.data_transformation_config.pickle_file_name
+            )
+            with open(pickle_file_path, "wb") as pickle_file:
+                pickle.dump(data_dict, pickle_file)
+
+            logging.info("Train and test arrays saved as a single pickle file.")
 
         except Exception as e:
             raise e
