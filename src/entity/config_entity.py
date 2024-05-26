@@ -71,3 +71,7 @@ class DataTransformationConfig:
         )
 
         self.pickle_file_name:str = TRANSFORM_PICKLE_FILE_NAME
+
+        self.train_test_file_path:str = os.path.join(
+            ARTIFACTS_DIR,TRAIN_TEST_SET_DATA_LOCATION
+        )
