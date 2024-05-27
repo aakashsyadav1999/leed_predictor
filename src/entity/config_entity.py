@@ -75,3 +75,18 @@ class DataTransformationConfig:
         self.train_test_file_path:str = os.path.join(
             ARTIFACTS_DIR,TRAIN_TEST_SET_DATA_LOCATION
         )
+
+#Model Trainer 
+@dataclass
+class ModelTrainerConfig:
+
+    def __init__(self):
+        
+        self.model_trainer_dir:str = os.path.join(
+            ARTIFACTS_DIR,MODEL_TRAINING_ARTIFACTS_DIR
+        )
+
+        self.xgboost_params = PARAM_GRID
+
+        self.random_forest_params = PARAM_GRID_RF
+        

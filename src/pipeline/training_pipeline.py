@@ -5,8 +5,9 @@ from src.constants import *
 
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 from src.entity.config_entity import (
-    DataIngestionConfig,DataTransformationConfig
+    DataIngestionConfig,DataTransformationConfig,ModelTrainerConfig
     
 )
 
@@ -19,6 +20,7 @@ class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
         self.data_transformation_config = DataTransformationConfig()
+        self.model_trainer_config = ModelTrainerConfig()
 
 
     #Permission for directory to read, write, delete    
@@ -73,26 +75,27 @@ class TrainPipeline:
         except Exception as e:
             raise NerException(e, sys) from e
     
-    # #This method starts model trainer.
-    # def start_model_trainer(self) -> ModelTrainerConfig:
-    #     logging.info("Entered Model Building in training pipeline")
-    #     try:
-    #         directory_path = self.model_trainer_config.model_trainer_dir
-    #         self.create_directory_with_permissions(directory_path)
-    #         logging.info(f"Creating {directory_path}")
+    #This method starts model trainer.
+    def start_model_trainer(self) -> ModelTrainerConfig:
+        logging.info("Entered Model Building in training pipeline")
+        try:
+            directory_path = self.model_trainer_config.model_trainer_dir
+            self.create_directory_with_permissions(directory_path)
+            logging.info(f"Creating {directory_path}")
 
-    #         logging.info("Starting Model Trainer")
-    #         #Make object of model transformation config and all the initate model transformation function.
-    #         model_trainer = ModelTrainer(
-    #             model_trainer_config=self.model_trainer_config
-    #         )
-    #         #call function
-    #         model_transformations = model_trainer.initiate_model_trainer()
-    #         logging.info("Creating model")
-    #         logging.info("Exited the model trainer method of TrainPipeline class")
-    #         return model_transformations
-    #     except Exception as e:
-    #         raise NerException(e, sys) from e
+            logging.info("Starting Model Trainer")
+            #Make object of model transformation config and all the initate model transformation function.
+            model_trainer = ModelTrainer(
+                model_trainer_config=self.model_trainer_config,
+                data_transformation_config=self.data_transformation_config
+            )
+            #call function
+            model_transformations = model_trainer.initiate_model_trainer()
+            logging.info("Creating model")
+            logging.info("Exited the model trainer method of TrainPipeline class")
+            return model_transformations
+        except Exception as e:
+            raise NerException(e, sys) from e
 
     # This method is used to start the training pipeline
     def run_pipeline(self) -> None:
