@@ -20,23 +20,53 @@ class CustomLabelEncoder(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         for col in self.columns:
-            self.encoders[col].fit(X[col])
+            self.encoders[col].fit(X[col].astype(str))
         return self
 
     def transform(self, X, y=None):
         X_copy = X.copy()
         for col in self.columns:
-            X_copy[col] = self.encoders[col].transform(X_copy[col])
+            X_copy[col] = self.encoders[col].transform(X_copy[col].astype(str))
         return X_copy
 
     def get_feature_names_out(self, input_features=None):
         return self.columns if input_features is None else input_features
+
+class CustomTargetEncoder(BaseEstimator, TransformerMixin):
+    def __init__(self, columns=None, target=None):
+        self.columns = columns
+        self.target = target
+        self.encoders = {col: TargetEncoder() for col in columns}
+
+    def fit(self, X, y=None):
+        for col in self.columns:
+            self.encoders[col].fit(X[col].astype(str), y.astype(str))
+        return self
+
+    def transform(self, X):
+        X_copy = X.copy()
+        for col in self.columns:
+            X_copy[col] = self.encoders[col].transform(X[col].astype(str))
+        return X_copy
+
+class DropColumnsTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return X.drop(columns=self.columns)
+
+
 
 class DataTransformation:
     def __init__(self, data_transformation_config: DataTransformationConfig):
         self.data_transformation_config = data_transformation_config
         self.transformed_data = None
         self.preprocessor = None
+        self.label_encoder = LabelEncoder() 
 
     def read_csv(self):
         try:
@@ -46,7 +76,8 @@ class DataTransformation:
             if not csv_files:
                 raise FileNotFoundError("No CSV files found in the directory")
             csv_file_path = os.path.join(data_directory, csv_files[0])
-            df = pd.read_csv(csv_file_path, encoding='latin1', low_memory=False)
+            df = pd.read_csv(csv_file_path, encoding='latin1', low_memory=False, skipinitialspace=True)
+            df.isnull().sum()
             return df
         except Exception as e:
             logging.error(f"No CSV file found: {e}")
@@ -60,76 +91,38 @@ class DataTransformation:
 
     def separating_data(self, df):
         try:
+            logging.info(f"Data columns: {df.columns.tolist()}")
             df = df[df[self.data_transformation_config.is_certified] == 'Yes']
             df = df[df[self.data_transformation_config.is_confidential] == 'No']
             df[self.data_transformation_config.registration_year] = pd.to_datetime(df[self.data_transformation_config.registration_date])
             df[self.data_transformation_config.year] = df[self.data_transformation_config.registration_year].dt.year
             df = df[df[self.data_transformation_config.year] >= 2015]
-            df = df[df[self.data_transformation_config.country_column].isin(self.data_transformation_config.countries)]
-            df.drop(self.data_transformation_config.column_to_drop, inplace=True, axis=1)
-            df = df.dropna()
+
+            if self.data_transformation_config.country_column in df.columns:
+                df = df[df[self.data_transformation_config.country_column].isin(self.data_transformation_config.countries)]
+            else:
+                raise KeyError(f"Column '{self.data_transformation_config.country_column}' not found in DataFrame")
+            df.dropna(inplace=True)
             df = df.fillna(0)
-            df = df.drop_duplicates()
             logging.info(f"Separating data {df.head()}")
-            df.to_csv("cleaned_seprated_data.csv")
+            logging.info(f"Separating data {df.columns}")
+            logging.info(f"Data dtypes of columns {df.dtypes}")
+            logging.info(f"Data dtypes of columns {df.isnull().sum()}")
+            df.to_csv("cleaned_separated_data.csv")
+            
             return df
         except Exception as e:
             logging.error(f"Error separating data: {e}")
             raise
 
-    def target_encode(self, df):
+    def create_pipeline(self, label_encode_columns, one_hot_encode_columns, target_encode_columns, drop_columns):
         try:
-            encoder = TargetEncoder()
-            target_column = self.data_transformation_config.target_column
-
-            if isinstance(target_column, list):
-                if len(target_column) == 1:
-                    target_column = target_column[0]
-                else:
-                    raise ValueError(f"Multiple target columns specified: {target_column}")
-
-            if target_column not in df.columns:
-                raise ValueError(f"Target column {target_column} is not in DataFrame columns")
-
-            if df[target_column].dtype == 'object':
-                df[target_column] = df[target_column].astype('category').cat.codes
-
-            y = df[target_column].values
-            logging.info(f"Target column {target_column} type: {df[target_column].dtype}")
-            logging.info(f"Shape of target column {target_column}: {y.shape}")
-
-            if y.ndim != 1:
-                raise ValueError(f"Target column {target_column} is not 1D after extraction. Shape: {y.shape}")
-
-            for column in self.data_transformation_config.target_encoding:
-                if df[column].dtype == 'object':
-                    df[column] = df[column].astype('category').cat.codes
-                df[column] = encoder.fit_transform(df[column], y)
-
-            return df
-        except Exception as e:
-            logging.error(f"Error during target encoding: {e}")
-            raise e
-
-    def create_pipeline(self, df):
-        try:
-            label_encode_columns = self.data_transformation_config.label_encoder
-            one_hot_encode_columns = self.data_transformation_config.one_hot_encoding
-
-            logging.info(f"Label encoding columns: {label_encode_columns}")
-            logging.info(f"One hot encoding columns: {one_hot_encode_columns}")
-
-            # Remove the target column from the features to be transformed
-            label_encode_columns = [col for col in label_encode_columns if col != self.data_transformation_config.target_column]
-            logging.info(f"This is label_encode_columns {label_encode_columns}")
-            one_hot_encode_columns = [col for col in one_hot_encode_columns if col != self.data_transformation_config.target_column]
-            logging.info(f"This is one_hot_encode_column {one_hot_encode_columns}")
-            df = self.ensure_column_types(df, label_encode_columns, 'object')
-            logging.info(f"This data is before calling columnTransformer{df}")
             preprocessor = ColumnTransformer(
                 transformers=[
                     ('label_encoder', CustomLabelEncoder(columns=label_encode_columns), label_encode_columns),
-                    ('one_hot_encoder', OneHotEncoder(sparse_output=False), one_hot_encode_columns)
+                    ('one_hot_encoder', OneHotEncoder(sparse=True), one_hot_encode_columns),
+                    ('target_encoder', CustomTargetEncoder(columns=target_encode_columns, target=self.data_transformation_config.target_column), target_encode_columns),
+                    ('drop_columns', DropColumnsTransformer(columns=drop_columns), drop_columns)
                 ],
                 remainder='passthrough'
             )
@@ -139,19 +132,6 @@ class DataTransformation:
             return pipeline
         except Exception as e:
             logging.error(f"Error during pipeline creation: {e}")
-            raise e
-
-    def one_hot_encoding(self, df):
-        try:
-            encoded_columns = pd.get_dummies(df[self.data_transformation_config.one_hot_encoding], dtype=int)
-            df_encoded = pd.concat([df, encoded_columns], axis=1)
-            df_encoded.drop(self.data_transformation_config.one_hot_encoding, axis=1, inplace=True)
-            os.makedirs(self.data_transformation_config.train_test_file_path, exist_ok=True)
-            df_encoded.to_csv(os.path.join(self.data_transformation_config.train_test_file_path, 'final_data.csv'), index=False)
-            logging.info(f"After one hot encoding:\n{df_encoded.head()}")
-            return df_encoded
-        except Exception as e:
-            logging.error(f"Error during one-hot encoding: {e}")
             raise e
 
     def split_train_test_split(self, df):
@@ -180,45 +160,61 @@ class DataTransformation:
             logging.error(f"Error during train-test split: {e}")
             raise e
 
-    def debug_transformation(self, df, transformer, columns):
-        try:
-            transformed = transformer.fit_transform(df[columns])
-            logging.info(f"Transformed shape: {transformed.shape}")
-            return transformed
-        except Exception as e:
-            logging.error(f"Error during debug transformation: {e}")
-            raise e
-
     def transform(self):
         try:
+            # Step 1: Read and clean the data
             df = self.read_csv()
             logging.info(f"Data shape after reading CSV: {df.shape}")
 
-            df = self.separating_data(df)
-            logging.info(f"Data shape after separating: {df.shape}")
+            # Step 2: Separate the data
+            df_new = self.separating_data(df)
+            logging.info(f"Data shape after separating: {df_new.shape}")
+            logging.info(f"Data types after separating: {df_new.dtypes}")
 
-            logging.info("Applying target encoding.")
-            df_transformed = self.target_encode(df)
-            logging.info(f"Data shape after target encoding: {df_transformed.shape}")
+            # Step 3: Prepare column lists
+            label_encode_columns = [col for col in self.data_transformation_config.label_encoder if col != self.data_transformation_config.target_column]
+            target_encode_columns = self.data_transformation_config.target_encoding
+            drop_columns = self.data_transformation_config.column_to_drop
+            one_hot_encode_columns = [col for col in self.data_transformation_config.one_hot_encoding if col != self.data_transformation_config.target_column]
 
-            logging.info("Creating preprocessing pipeline.")
-            preprocessor = self.create_pipeline(df_transformed)
+            # Ensure all columns to be encoded are strings
+            df_new = self.ensure_column_types(df_new, label_encode_columns, 'object')
+            df_new = self.ensure_column_types(df_new, one_hot_encode_columns, 'object')
+            df_new = self.ensure_column_types(df_new, target_encode_columns, 'object')
 
-            logging.info("Applying preprocessing pipeline.")
-            features = df_transformed.drop(columns=[self.data_transformation_config.target_column])
-            transformed_features = preprocessor.fit_transform(features)
-            logging.info(f"Data shape after preprocessing pipeline: {transformed_features.shape}")
+            # Step 4: Encode the target column to numerical values
+            target_column = self.data_transformation_config.target_column
+            y = df_new[target_column]
+            logging.info(f"Target column after encoding: {df_new[target_column].head()}")
 
-            df_transformed = pd.DataFrame(transformed_features, columns=preprocessor.get_feature_names_out())
-            df_transformed[self.data_transformation_config.target_column] = df[self.data_transformation_config.target_column].values
-            logging.info(f"Data shape after converting to DataFrame: {df_transformed.shape}")
+            # Step 5: Separate features (X) and target (y)
+            X = df_new.drop(columns=[target_column])
+            logging.info(f"Feature columns: {X.columns.tolist()}")
+            logging.info(f"Shape of X: {X.shape}, Shape of y: {y.shape}")
 
-            self.transformed_data = df_transformed
-            self.preprocessor = preprocessor
+            # Step 6: Create and fit the preprocessing pipeline
+            pipeline = self.create_pipeline(label_encode_columns, one_hot_encode_columns, target_encode_columns, drop_columns)
+            self.preprocessor = pipeline.fit(X, y)
+
+            # Step 7: Transform the features
+            X_transformed = self.preprocessor.transform(X)
+            logging.info(f"Shape of transformed X: {X_transformed.shape}")
+
+            # Step 8: Combine the transformed features back into a DataFrame
+            transformed_df = pd.DataFrame(X_transformed, columns=self.preprocessor.get_feature_names_out())
+            transformed_df[target_column] = y.values
+            logging.info(f"Shape of transformed DataFrame: {transformed_df.shape}")
+
+            # Step 9: Store the transformed data
+            self.transformed_data = transformed_df
+
             logging.info("Data transformed successfully.")
         except Exception as e:
             logging.error(f"Error during data transformation: {e}")
             raise e
+
+
+
 
     def save_preprocessor(self):
         try:
@@ -240,13 +236,8 @@ class DataTransformation:
 
             self.transform()
             self.save_preprocessor()
+
             logging.info("Train and test arrays saved as a single pickle file.")
         except Exception as e:
             logging.error(f"Error during data transformation initiation: {e}")
             raise e
-
-def ensure_column_types(df, columns, target_type):
-    for col in columns:
-        if df[col].dtype != target_type:
-            df[col] = df[col].astype(target_type)
-    return df
