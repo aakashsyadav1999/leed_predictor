@@ -20,15 +20,14 @@ DATA_TRANSFORMATION_DIR = "DataTransformationArtifacts"
 DATA_TRANSFORMATION_FILE = 'cleaned_data.csv'
 COLUMNS_TO_DROP = [
                 
+                'ID',
                 'State',
                 'Zipcode',
                 'OwnerOrganization',
                 'TotalPropArea',
                 'Street',
                 'CertDate',
-                'RegistrationDate',
-                'RegistrationYear',
-                'year'
+                'RegistrationDate'
                 
                 ]
 
@@ -84,7 +83,7 @@ ONE_HOT_ENCODING = [
                     'Country',
                     'LEEDSystemVersionDisplayName',
                     'ProjectTypes',
-                    'OwnerTypes',
+                    'OwnerTypes'
                     
                     ]
 
