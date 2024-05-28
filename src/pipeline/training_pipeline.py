@@ -106,3 +106,4 @@ class TrainPipeline:
             #model_transformations = self.start_model_trainer()
         except Exception as e:
             raise e
+    

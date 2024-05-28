@@ -20,14 +20,15 @@ DATA_TRANSFORMATION_DIR = "DataTransformationArtifacts"
 DATA_TRANSFORMATION_FILE = 'cleaned_data.csv'
 COLUMNS_TO_DROP = [
                 
-                'ID',
                 'State',
                 'Zipcode',
                 'OwnerOrganization',
                 'TotalPropArea',
                 'Street',
                 'CertDate',
-                'RegistrationDate'
+                'RegistrationDate',
+                'RegistrationYear',
+                'year'
                 
                 ]
 
@@ -61,10 +62,11 @@ CONVERT_TO_INT = 'PointsAchieved'
 
 LABEL_ENCODER = [
                  
-                 'CertLevel',
-                 'IsCertified',
-                 'Isconfidential',
-                 'UnitOfMeasurement'
+                'CertLevel',
+                'IsCertified',
+                'Isconfidential',
+                'UnitOfMeasurement'
+                 
                  
                  ]
 
@@ -82,7 +84,7 @@ ONE_HOT_ENCODING = [
                     'Country',
                     'LEEDSystemVersionDisplayName',
                     'ProjectTypes',
-                    'OwnerTypes'
+                    'OwnerTypes',
                     
                     ]
 
@@ -95,3 +97,26 @@ TRAIN_TEST_SET_DATA_LOCATION = "ModelTrainingArtifacts"
 
 
 #Model Building
+MODEL_TRAINING_ARTIFACTS_DIR = "ModelTrainingArtifacts"
+
+PARAM_GRID = {
+    
+    'learning_rate': [0.1, 0.01],
+    'max_depth': [3, 5, 7],
+    'n_estimators': [100, 200, 300],
+    # Add other parameters you want to tune
+
+}
+
+
+PARAM_GRID_RF = {
+    
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'max_features': ['auto', 'sqrt', 'log2']
+
+}
+
+
