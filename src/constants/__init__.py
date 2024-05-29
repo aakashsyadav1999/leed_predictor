@@ -12,7 +12,8 @@ ROOT_DIR = "DataIngestionArtifacts"
 SOURCE_URL= "https://drive.google.com/file/d/1q798fY102ZmcA9wRPjhWEw0PxKqB7u07/view?usp=sharing"
 UNZIP_DIR= ROOT_DIR
 LOCAL_FILE_PATH = "public_leed_data.zip"
-UNZIP_DIR_CSV_DATA = "DataTransformationArtifacts"
+UNZIP_DIR_CSV_DATA = "DataIngestionArtifacts"
+SPLIT_TRAIN_TES_DATA = "DataTransformationArtifacts"
 
 
 #Data Transformation
@@ -61,19 +62,19 @@ CONVERT_TO_INT = 'PointsAchieved'
 
 LABEL_ENCODER = [
                  
-                'CertLevel',
                 'IsCertified',
                 'Isconfidential',
-                'UnitOfMeasurement'
+                'UnitOfMeasurement',
+                'City',
+                'ProjectName'
                  
                  
                  ]
 
 TARGET_ENCODING = [
                  
-                 'City',
-                 'ProjectName'
-                 
+                 None
+
                  ]
 
 TARGET_COLUMN = 'CertLevel'
@@ -87,7 +88,14 @@ ONE_HOT_ENCODING = [
                     
                     ]
 
-STANDARDSCALER = 'GrossFloorArea'
+STANDARDSCALER = ['GrossFloorArea']
+
+NUMERICAL_ERROR = [
+                    'GrossFloorArea'
+                   ]
+
+
+
 
 MODEL_DIR = "MODEL_DIR"
 TRANSFORM_PICKLE_FILE_NAME = 'transformed_data.pkl'

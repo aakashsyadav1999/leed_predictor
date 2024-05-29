@@ -27,6 +27,10 @@ class DataIngestionConfig:
             ARTIFACTS_DIR,UNZIP_DIR_CSV_DATA
         )
 
+        self.split_train_test:str = os.path.join(
+            ARTIFACTS_DIR,SPLIT_TRAIN_TES_DATA
+        )
+
 #Data Transformation
 @dataclass
 class DataTransformationConfig:
@@ -38,7 +42,7 @@ class DataTransformationConfig:
         )
         self.data_transformation_file_name: str = DATA_TRANSFORMATION_FILE
 
-        self.column_to_drop:str = COLUMNS_TO_DROP
+        self.column_to_drop:list = COLUMNS_TO_DROP
 
         self.is_certified:str = IS_CERTIFIED
         
@@ -52,21 +56,23 @@ class DataTransformationConfig:
 
         self.country_column:str = COUNTRY_COLUMN
 
-        self.countries:str = COUNTRIES
+        self.countries:list = COUNTRIES
 
         self.column_convert_to_int:str = CONVERT_TO_INT
 
-        self.label_encoder:str = LABEL_ENCODER
+        self.label_encoder: list = LABEL_ENCODER
 
-        self.target_encoding:str = TARGET_ENCODING
+        self.target_encoding: list = TARGET_ENCODING
 
         self.target_column:str = TARGET_COLUMN
 
-        self.one_hot_encoding:str = ONE_HOT_ENCODING
+        self.one_hot_encoding: list= ONE_HOT_ENCODING
 
         self.standard_scaler:str = STANDARDSCALER
+        
+        self.numerical_column:list = self.standard_scaler
 
-        self.model_dir:str = os.path.join(
+        self.model_dir:Path = os.path.join(
             MODEL_DIR
         )
 

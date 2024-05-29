@@ -36,7 +36,7 @@ print(sample_df.dtypes)
 import pickle
 
 # Load the preprocessor from the pickle file
-preprocessor_path = r'D:\aakashyadav\other_end_end_projects\leed_predictor\MODEL_DIR\preprocessor.pkl'
+preprocessor_path = r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\preprocessor.pkl'
 with open(preprocessor_path, 'rb') as f:
     preprocessor = pickle.load(f)
 
@@ -61,7 +61,7 @@ from sklearn.pipeline import Pipeline
 # ])
 
 # Transform the sample data using the preprocessor
-train_df = pd.read_csv(r'D:\aakashyadav\other_end_end_projects\leed_predictor\data\PublicLEEDProjectsDirectory.csv',encoding='latin1', low_memory=False, skipinitialspace=True)
+train_df = pd.read_csv(r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\DataTransformationArtifacts\train.csv',encoding='latin1', low_memory=False, skipinitialspace=True)
 preprocessor.fit(train_df)
 preprocessed_sample_data = preprocessor.transform(sample_df)
 

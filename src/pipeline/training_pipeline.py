@@ -67,8 +67,12 @@ class TrainPipeline:
             data_transformation = DataTransformation(
                 data_transformation_config=self.data_transformation_config
             )
+            
             #call function
-            data_transformation_artifact = data_transformation.initiate_data_transformation()
+            train_path = r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\DataTransformationArtifacts\train.csv'
+            test_path = r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\DataTransformationArtifacts\test.csv'
+        
+            data_transformation_artifact = data_transformation.initiate_data_transformation(train_path,test_path)
             logging.info("Cleaned Data")
             logging.info("Exited the data_transformation method of TrainPipeline class")
             return data_transformation_artifact
