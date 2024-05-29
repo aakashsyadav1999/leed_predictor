@@ -20,7 +20,7 @@ SPLIT_TRAIN_TES_DATA = "DataTransformationArtifacts"
 DATA_TRANSFORMATION_DIR = "DataTransformationArtifacts"
 DATA_TRANSFORMATION_FILE = 'cleaned_data.csv'
 COLUMNS_TO_DROP = [
-                
+                'ID',
                 'State',
                 'Zipcode',
                 'OwnerOrganization',
