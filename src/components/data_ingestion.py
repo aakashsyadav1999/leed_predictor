@@ -81,6 +81,9 @@ class DataIngestion:
             csv_file_path = os.path.join(data_directory, csv_files[0])
             df = pd.read_csv(csv_file_path, encoding='latin1', low_memory=False, skipinitialspace=True)
             df['CertLevel'] = df['CertLevel'].replace({'Platinum':1,'Denied':0,'Gold':2,'Certified':3,'Silver':4,'Bronze':5})
+            df.dropna(inplace=True)
+            df['CertLevel'] = df['CertLevel'].astype(int)
+            
             df.isnull().sum()
             return df
         except Exception as e:
