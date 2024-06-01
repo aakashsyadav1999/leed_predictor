@@ -83,7 +83,21 @@ class DataIngestion:
             df['CertLevel'] = df['CertLevel'].replace({'Platinum':1,'Denied':0,'Gold':2,'Certified':3,'Silver':4,'Bronze':5})
             df.dropna(inplace=True)
             df['CertLevel'] = df['CertLevel'].astype(int)
+            df = df.loc[
             
+                (df['Country'] == 'IN') |
+                (df['Country'] == 'BD') |
+                (df['Country'] == 'CN') |
+                (df['Country'] == 'SG') |
+                (df['Country'] == 'MY') |
+                (df['Country'] == 'ID') |
+                (df['Country'] == 'JP') |
+                (df['Country'] == 'LA') |
+                (df['Country'] == 'KR') |
+                (df['Country'] == 'VN')
+                
+                ]
+                
             df.isnull().sum()
             return df
         except Exception as e:
@@ -92,8 +106,11 @@ class DataIngestion:
         
     def split_train_test_split(self,df):
         try:
-            train,test = train_test_split(df,test_size=0.2,random_state=42)
+            
+            os.makedirs(self.data_ingestion_config.split_train_test, exist_ok=True)
 
+            train,test = train_test_split(df,test_size=0.2,random_state=42)
+            
             train.to_csv(os.path.join(self.data_ingestion_config.split_train_test,'train.csv'),index=False)
             test.to_csv(os.path.join(self.data_ingestion_config.split_train_test,'test.csv'),index=False)
             

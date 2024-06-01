@@ -105,7 +105,7 @@ class TrainPipeline:
     def run_pipeline(self) -> None:
         try:
             logging.info("Started Model training >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            #data_ingestion_artifact = self.start_data_ingestion()
+            data_ingestion_artifact = self.start_data_ingestion()
             data_transformation_artifact = self.start_data_transformation()
             #model_transformations = self.start_model_trainer()
         except Exception as e:
