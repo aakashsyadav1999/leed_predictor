@@ -4,23 +4,6 @@ import pandas as pd
 import numpy as np
 import logging
 from dataclasses import dataclass
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder, FunctionTransformer
-from sklearn.compose import ColumnTransformer
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.base import BaseEstimator, TransformerMixin
-from src.exception import NerException
-from src.logger import logging
-from src.entity.config_entity import DataTransformationConfig
-from src.utils.common import save_object
-
-
-import os
-import sys
-import pandas as pd
-import numpy as np
-import logging
-from dataclasses import dataclass
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder, FunctionTransformer, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
@@ -31,6 +14,7 @@ from src.logger import logging
 from src.entity.config_entity import DataTransformationConfig
 from src.utils.common import save_object
 
+@dataclass
 class CustomLabelEncoder(BaseEstimator, TransformerMixin):
     def __init__(self, columns=None):
         self.columns = columns
@@ -50,6 +34,7 @@ class CustomLabelEncoder(BaseEstimator, TransformerMixin):
     def get_feature_names_out(self, input_features=None):
         return self.columns if input_features is None else input_features
 
+@dataclass
 class DataTransformation:
     def __init__(self, data_transformation_config: DataTransformationConfig):
         self.data_transformation_config = data_transformation_config
@@ -69,7 +54,6 @@ class DataTransformation:
             columns_to_drop = self.data_transformation_config.column_to_drop
 
             cat_cols = self.data_transformation_config.one_hot_encoding
-            #label_encode_cols = self.data_transformation_config.label_encoder
             ordinal_encode_cols = self.data_transformation_config.label_encoder
             num_cols = self.data_transformation_config.numerical_column
 
@@ -84,11 +68,6 @@ class DataTransformation:
                 ("scaler", StandardScaler(with_mean=False))
             ])
 
-            # label_pipeline = Pipeline(steps=[
-            #     ("imputer", SimpleImputer(strategy="most_frequent")),
-            #     ("label_encoder", CustomLabelEncoder(columns=label_encode_cols))
-            # ])
-
             ordinal_pipeline = Pipeline(steps=[
                 ("imputer", SimpleImputer(strategy="most_frequent")),
                 ("ordinal_encoder", OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1))
@@ -96,13 +75,11 @@ class DataTransformation:
 
             logging.info(f"Categorical Columns: {cat_cols}")
             logging.info(f"Numerical Columns: {num_cols}")
-            #logging.info(f"Label Encode Columns: {label_encode_cols}")
             logging.info(f"Ordinal Encode Columns: {ordinal_encode_cols}")
 
             preprocessor = ColumnTransformer(
                 transformers=[
                     ("cat_pipeline", cat_pipeline, cat_cols),
-                    #("label_pipeline", label_pipeline, label_encode_cols),
                     ("ordinal_pipeline", ordinal_pipeline, ordinal_encode_cols),
                     ("num_pipeline", num_pipeline, num_cols),
                     ("drop_columns", FunctionTransformer(self.drop_columns_function), columns_to_drop),

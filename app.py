@@ -43,28 +43,26 @@ with open(preprocessor_path, 'rb') as f:
 # Print the preprocessor to understand its structure
 print(preprocessor)
 
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.pipeline import Pipeline
+# Load the training data to fit the preprocessor
+train_df = pd.read_csv(r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\DataTransformationArtifacts\train.csv', encoding='latin1', low_memory=False, skipinitialspace=True)
 
-# Example column transformer
-# preprocessor = ColumnTransformer(
-#     transformers=[
-#         ('num', StandardScaler(), ['GrossFloorArea', 'TotalPropArea', 'PointsAchieved']),
-#         ('cat', OneHotEncoder(handle_unknown='ignore'), ['Isconfidential', 'City', 'State', 'Country'])
-#     ]
-# )
+# Ensure 'CertLevel' is not in the preprocessing pipeline
+if 'CertLevel' in train_df.columns:
+    train_df = train_df.drop(columns=['CertLevel'])
 
-# # Example pipeline
-# pipeline = Pipeline(steps=[
-#     ('preprocessor', preprocessor)
-# ])
+# Fit the preprocessor on the training data
+preprocessor.fit(train_df)
+
+# Drop the target column 'CertLevel' from the sample data before transformation
+sample_features = sample_df.drop(columns=['CertLevel'])
 
 # Transform the sample data using the preprocessor
-train_df = pd.read_csv(r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\DataTransformationArtifacts\train.csv',encoding='latin1', low_memory=False, skipinitialspace=True)
-preprocessor.fit(train_df)
-preprocessed_sample_data = preprocessor.transform(sample_df)
+preprocessed_sample_data = preprocessor.transform(sample_features)
 
-print(preprocessed_sample_data)
-preprocessed_sample_data = pd.DataFrame(preprocessed_sample_data)
-preprocessed_sample_data.to_csv('preprocessed_sample_data.csv')
+# Convert the transformed data back to a DataFrame if necessary
+preprocessed_sample_data_df = pd.DataFrame(preprocessed_sample_data)
+
+# Save the preprocessed sample data to a CSV file
+preprocessed_sample_data_df.to_csv('preprocessed_sample_data.csv', index=False)
+
+print(preprocessed_sample_data_df)
