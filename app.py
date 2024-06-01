@@ -1,5 +1,8 @@
 import pandas as pd
+import pickle
+import os
 
+from src.utils.common import save_object, load_object
 
 # Sample data
 sample_data = {
@@ -36,33 +39,51 @@ print(sample_df.dtypes)
 import pickle
 
 # Load the preprocessor from the pickle file
-preprocessor_path = r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\preprocessor.pkl'
+preprocessor_path = os.path.join('MODEL_DIR','preprocessor.pkl')
 with open(preprocessor_path, 'rb') as f:
     preprocessor = pickle.load(f)
 
+
+# Load the model from the pickle file
+model_path = os.path.join('MODEL_DIR','model.pkl')
+with open(model_path, 'rb') as f:
+    model = pickle.load(f)
+
+# Load the saved models and preprocessor
+model_pkl_filepath = os.path.join('MODEL_DIR')
+pickle_file_path = os.path.join(model_pkl_filepath, "model.pkl")
+with open(pickle_file_path, "rb") as pickle_file:
+    saved_object = pickle.load(pickle_file)
+
+
+preprocessor = saved_object['preprocessor']
+model = saved_object['model']
+
+
 # Print the preprocessor to understand its structure
 print(preprocessor)
-
-# Load the training data to fit the preprocessor
-train_df = pd.read_csv(r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\artifacts\DataTransformationArtifacts\train.csv', encoding='latin1', low_memory=False, skipinitialspace=True)
-
-# Ensure 'CertLevel' is not in the preprocessing pipeline
-if 'CertLevel' in train_df.columns:
-    train_df = train_df.drop(columns=['CertLevel'])
-
-# Fit the preprocessor on the training data
-preprocessor.fit(train_df)
+print(model)
 
 # Drop the target column 'CertLevel' from the sample data before transformation
 sample_features = sample_df.drop(columns=['CertLevel'])
 
 # Transform the sample data using the preprocessor
-preprocessed_sample_data = preprocessor.transform(sample_features)
+preprocessed_sample_data = preprocessor.transform(sample_df)
 
 # Convert the transformed data back to a DataFrame if necessary
 preprocessed_sample_data_df = pd.DataFrame(preprocessed_sample_data)
+preprocessed_sample_data_df.to_csv("preprocessed_sample_data_df.csv")
 
 # Save the preprocessed sample data to a CSV file
 preprocessed_sample_data_df.to_csv('preprocessed_sample_data.csv', index=False)
 
-print(preprocessed_sample_data_df)
+# Predict using the loaded model
+predictions = model.predict(preprocessed_sample_data_df)
+
+# Combine predictions with the sample data
+sample_df['Predictions'] = predictions
+
+# Save the sample data with predictions to a CSV file
+sample_df.to_csv('sample_data_with_predictions.csv', index=False)
+
+print(sample_df)
