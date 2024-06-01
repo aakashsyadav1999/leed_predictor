@@ -1,6 +1,6 @@
 import pandas as pd
 import pickle
-from dataclasses import dataclass
+from dataclasses import dataclass,field
 import os
 
 from src.constants import *
@@ -18,6 +18,9 @@ from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
 
+from src.utils.common import save_object
+
+
 @dataclass
 #class for initiating all methods
 class ModelTrainer:
@@ -26,134 +29,69 @@ class ModelTrainer:
     
         self.model_trainer_config = model_trainer_config
         self.data_transformation_config = data_transformation_config
+        self.trained_model_file_path=os.path.join('MODEL_DIR','model.pkl')
 
+        # preprocessor_path = os.path.join('MODEL_DIR', 'preprocessor.pkl')
+        # if os.path.exists(preprocessor_path):
+        #     with open(preprocessor_path, 'rb') as f:
+        #         self.preprocessor = pickle.load(f)
 
-    def read_csv_files_from_directory(self,directory):
+    def model_train(self,train_array,test_array):
+
         try:
-            # List all files in the directory
-            files = os.listdir(directory)
+            logging.info("Enter into Model Building")
+            # Define features and target variables
+            X_train, y_train = train_array[:, :-1], train_array[:, -1]
+            X_test, y_test = test_array[:, :-1], test_array[:, -1]
 
-            # Filter for CSV files
-            csv_files = [file for file in files if file.endswith('.csv')]
+            # Apply SMOTE to the training data for CertLevel prediction
+            smote = SMOTE(k_neighbors=1, n_jobs=-1, sampling_strategy='auto', random_state=42)
+            X_train,y_train = smote.fit_resample(X_train, y_train)
 
-            # Check if there are any CSV files
-            if not csv_files:
-                raise FileNotFoundError("No CSV files found in the directory")
+            # Create RandomForestClassifier
+            rf_model_cert = RandomForestClassifier(random_state=42)
 
-            # Read the train.csv and test.csv files if they exist
-            train_file_path = None
-            test_file_path = None
 
-            for file in csv_files:
-                if 'train' in file.lower():
-                    train_file_path = os.path.join(directory, file)
-                elif 'test' in file.lower():
-                    test_file_path = os.path.join(directory, file)
+            # Perform GridSearchCV with increased regularization
+            grid_search_rf = GridSearchCV(estimator=rf_model_cert, param_grid=self.model_trainer_config.random_forest_params, cv=5, scoring='accuracy', n_jobs=-1)
+            grid_search_rf.fit(X_train, y_train)
 
-            if train_file_path is None or test_file_path is None:
-                raise FileNotFoundError("Train or test CSV file not found in the directory")
+            # Best parameters found for CertLevel prediction with increased regularization
+            print("Best Parameters for CertLevel (RandomForest with Increased Classification):", grid_search_rf.best_params_)
 
-            train_df = pd.read_csv(train_file_path, encoding='latin1', low_memory=False)
-            test_df = pd.read_csv(test_file_path, encoding='latin1', low_memory=False)
+            # Best estimator for CertLevel prediction with increased regularization
+            best_estimator_rf = grid_search_rf.best_estimator_
 
-            return train_df, test_df
+            # Evaluate the best estimator for CertLevel prediction with increased regularization on the test set
+            accuracy_cert_rf = best_estimator_rf.score(X_test, y_test)
+            print("Accuracy for CertLevel (RandomForest with Increased Classification):", accuracy_cert_rf)
 
-        except Exception as e:
-            logging.error(f"Error reading CSV files: {e}")
-            raise
+            # # Evaluate the RandomForestClassifier model with increased regularization on the validation set
+            # accuracy_cert_rf_val = best_estimator_rf.score(X_val, y_val)
+            # print("Accuracy for CertLevel (RandomForest with Increased Regularization - Validation):", accuracy_cert_rf_val)
 
-    def model_train(self,train):
-
-        # Define features and target variables
-        X = train.drop([self.data_transformation_config.column_convert_to_int, self.data_transformation_config.target_column], axis=1)
-        y_points = train[self.data_transformation_config.column_convert_to_int]
-        y_cert = train[self.data_transformation_config.target_column]
-
-        # Split data into training and testing sets
-        X_train, X_test, y_points_train, y_points_test, y_cert_train, y_cert_test = train_test_split(
-            X, y_points, y_cert, test_size=0.2, random_state=42
+            # Creating directories if they don't exist
+            os.makedirs(self.data_transformation_config.model_dir, exist_ok=True)
+            
+            save_object(
+                file_path=self.trained_model_file_path,
+                obj=best_estimator_rf
             )
-
-        # Scaling numerical features
-        scaler = StandardScaler()
-        columns_to_scale = [self.data_transformation_config.standard_scaler]
-        X_train[columns_to_scale] = scaler.fit_transform(X_train[columns_to_scale])
-        X_test[columns_to_scale] = scaler.transform(X_test[columns_to_scale])
-
-        # Apply SMOTE to the training data for CertLevel prediction
-        smote = SMOTE(k_neighbors=1, n_jobs=-1, sampling_strategy='auto', random_state=42)
-        X_train_res, y_train_res = smote.fit_resample(X_train, y_cert_train)
-
-        # Create XGBoost classifier with increased regularization parameters
-        xgb_model_cert = xgb.XGBClassifier(objective='multi:softmax', num_class=4)
-
-        # Perform grid search with cross-validation
-        grid_search_cert = GridSearchCV(estimator=xgb_model_cert, param_grid=self.model_trainer_config.xgboost_params, cv=5, scoring='accuracy', n_jobs=-1)
-        grid_search_cert.fit(X_train_res, y_train_res)
-
-        # XGBoost Regressor for PointsAchieved prediction
-        xgb_model_points = xgb.XGBRegressor()
-        xgb_model_points.fit(X_train, y_points_train)
-
-        # Predict and evaluate PointsAchieved
-        points_predictions = xgb_model_points.predict(X_test)
-        mse = mean_squared_error(y_points_test, points_predictions)
-        print(f'Mean Squared Error (PointsAchieved): {mse}')
-
-        # Create RandomForestClassifier
-        rf_model_cert = RandomForestClassifier(random_state=42)
-
-        # Split the data into training and validation sets (80% training, 20% validation)
-        X_train, X_val, y_train, y_val = train_test_split(X, y_cert, test_size=0.2, random_state=42)
-
-
-        # Perform GridSearchCV with increased regularization
-        grid_search_rf = GridSearchCV(estimator=rf_model_cert, param_grid=self.model_trainer_config.random_forest_params, cv=5, scoring='accuracy', n_jobs=-1)
-        grid_search_rf.fit(X_train_res, y_train_res)
-
-        # Best parameters found for CertLevel prediction with increased regularization
-        #print("Best Parameters for CertLevel (RandomForest with Increased Regularization):", grid_search_rf.best_params_)
-
-        # Best estimator for CertLevel prediction with increased regularization
-        best_estimator_rf = grid_search_rf.best_estimator_
-
-        # Evaluate the best estimator for CertLevel prediction with increased regularization on the test set
-        accuracy_cert_rf = best_estimator_rf.score(X_test, y_cert_test)
-        print("Accuracy for CertLevel (RandomForest with Increased Regularization):", accuracy_cert_rf)
-
-        # Evaluate the RandomForestClassifier model with increased regularization on the validation set
-        accuracy_cert_rf_val = best_estimator_rf.score(X_val, y_val)
-        print("Accuracy for CertLevel (RandomForest with Increased Regularization - Validation):", accuracy_cert_rf_val)
-
-        # Save the models and other components to a pickle file
-        models_and_scalers = {
-            "xgb_model_cert": grid_search_cert.best_estimator_,
-            "xgb_model_points": xgb_model_points,
-            "rf_model_cert": best_estimator_rf,
-            "scaler": scaler
-        }
-
-        # Creating directories if they don't exist
-        os.makedirs(self.data_transformation_config.model_dir, exist_ok=True)
         
-        pickle_file_path = os.path.join(self.data_transformation_config.model_dir, "models_and_scalers.pkl")
-        with open(pickle_file_path, "wb") as pickle_file:
-            pickle.dump(models_and_scalers, pickle_file)
+        
+        except Exception as e:
+            raise e
 
 
-    def initiate_model_trainer(self):
+    def initiate_model_trainer(self,train_arr,test_arr):
 
         logging.info("Entered the initiate_model_trainer method of the model trainer class")
         try:
             os.makedirs(
                 self.model_trainer_config.model_trainer_dir,exist_ok=True
             )
-            
-            
-            train_df,test_df = self.read_csv_files_from_directory(self.data_transformation_config.train_test_file_path)
 
-
-            self.model_train(train_df)
+            self.model_train(train_arr,test_arr)
 
         except Exception as e:
             raise e
