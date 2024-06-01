@@ -36,9 +36,10 @@ class CustomLabelEncoder(BaseEstimator, TransformerMixin):
 
 @dataclass
 class DataTransformation:
+    
     def __init__(self, data_transformation_config: DataTransformationConfig):
         self.data_transformation_config = data_transformation_config
-        self.preprocessor_obj_file = os.path.join('artifacts', 'preprocessor.pkl')
+        self.preprocessor_obj_file = os.path.join('MODEL_DIR', 'preprocessor.pkl')
 
     def drop_columns(self, df, columns_to_drop):
         if not isinstance(df, pd.DataFrame):
@@ -64,8 +65,7 @@ class DataTransformation:
 
             cat_pipeline = Pipeline(steps=[
                 ("imputer", SimpleImputer(strategy="most_frequent")),
-                ("one_hot_encoder", OneHotEncoder(handle_unknown='ignore', sparse_output=False, dtype=int)),
-                ("scaler", StandardScaler(with_mean=False))
+                ("one_hot_encoder", OneHotEncoder(handle_unknown='ignore', sparse_output=False, dtype=int))
             ])
 
             ordinal_pipeline = Pipeline(steps=[
