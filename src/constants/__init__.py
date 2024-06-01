@@ -24,11 +24,9 @@ COLUMNS_TO_DROP = [
                 'State',
                 'Zipcode',
                 'OwnerOrganization',
-                'TotalPropArea',
                 'Street',
                 'CertDate',
                 'RegistrationDate'
-                
                 ]
 
 IS_CERTIFIED = 'IsCertified'
@@ -87,10 +85,11 @@ ONE_HOT_ENCODING = [
                     
                     ]
 
-STANDARDSCALER = ['GrossFloorArea']
+STANDARDSCALER = ['GrossFloorArea','TotalPropArea']
 
 NUMERICAL_ERROR = [
-                    'GrossFloorArea'
+                    'GrossFloorArea',
+                    'TotalPropArea'
                    ]
 
 
