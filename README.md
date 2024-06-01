@@ -28,14 +28,14 @@
    git clone <repository-url>
 
 2. **Navigate to the project directory::**
-
+    ```sh
     cd <project-directory>
 
 3. **Install dependencies:**
-    
+    ```sh
     pip install -r requirements.txt
 
 4. **Run the application:**
-    
+    ```sh
     python main.py
 
