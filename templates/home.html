@@ -1,0 +1,113 @@
+<html>
+<body>
+    <div class="login">
+       <h1>LEED PREDICTOR</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>LEED PREDICTION</legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">ID</label>
+            <input class="form-control" type="number" name="ID"
+                placeholder="ID" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Isconfidential</label>
+            <input class="form-control" type="text" name="Isconfidential"
+                placeholder="Isconfidential" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ProjectName</label>
+            <input class="form-control" type="text" name="ProjectName"
+                placeholder="ProjectName" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Street</label>
+            <input class="form-control" type="text" name="Street"
+                placeholder="Street" min='0' max='1000' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">City</label>
+            <input class="form-control" type="text" name="City"
+                placeholder="City" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">State</label>
+            <input class="form-control" type="text" name="State"
+                placeholder="State" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Zipcode</label>
+            <input class="form-control" type="number" name="Zipcode"
+                placeholder="Zipcode" min='0' max='5' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Country</label>
+            <input class="form-control" type="text" name="Country"
+                placeholder="Country" min='0' max='10' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">LEEDSystemVersionDisplayName</label>
+            <input class="form-control" type="text" name="LEEDSystemVersionDisplayName"
+                placeholder="LEEDSystemVersionDisplayName" min='2017' max='2023' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">PointsAchieved</label>
+            <input class="form-control" type="text" name="PointsAchieved"
+                placeholder="PointsAchieved" min='1' max='12' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">CertDate</label>
+            <input class="form-control" type="text" name="CertDate"
+                placeholder="CertDate" min='1' max='31' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">IsCertified</label>
+            <input class="form-control" type="text" name="IsCertified"
+                placeholder="IsCertified" min='1' max='31' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">OwnerTypes</label>
+            <input class="form-control" type="text" name="OwnerTypes"
+                placeholder="OwnerTypes" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">GrossFloorArea</label>
+            <input class="form-control" type="text" name="GrossFloorArea"
+                placeholder="GrossFloorArea" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">UnitOfMeasurement</label>
+            <input class="form-control" type="text" name="UnitOfMeasurement"
+                placeholder="UnitOfMeasurement" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">TotalPropArea</label>
+            <input class="form-control" type="number" name="TotalPropArea"
+                placeholder="TotalPropArea" min='0' max='100000' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ProjectTypes</label>
+            <input class="form-control" type="text" name="ProjectTypes"
+                placeholder="ProjectTypes" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">OwnerOrganization</label>
+            <input class="form-control" type="text" name="OwnerOrganization"
+                placeholder="OwnerOrganization" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">RegistrationDate</label>
+            <input class="form-control" type="text" name="RegistrationDate"
+                placeholder="RegistrationDate" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
