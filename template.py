@@ -24,6 +24,7 @@ list_of_files = [
                 f'src/constants/__init__.py',
                 f'src/entity/__init__.py',
                 f'src/entity/config_entity.py',
+                f'end_point.py',
                 f'app.py',
                 f'main.py',
                 f'Dockerfile', 
