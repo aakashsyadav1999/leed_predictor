@@ -39,6 +39,6 @@
     ```sh
     python main.py
 
-5. **Docker image pull:**
-    '''sh
+5. **Run the application:**
+    ```sh
     docker pull aakashsyadav1999/leedpredictor
