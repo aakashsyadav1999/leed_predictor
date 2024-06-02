@@ -9,7 +9,7 @@ LOGS_FILE_NAME = "SIDFC.log"
 
 #Data Ingestion
 ROOT_DIR = "DataIngestionArtifacts"
-SOURCE_URL= "https://drive.google.com/file/d/1q798fY102ZmcA9wRPjhWEw0PxKqB7u07/view?usp=sharing"
+SOURCE_URL= "https://drive.google.com/file/d/1uOUkKCYcRvdNIv4NagKRdT6YJ7W-EuB_/view?usp=sharing"
 UNZIP_DIR= ROOT_DIR
 LOCAL_FILE_PATH = "public_leed_data.zip"
 UNZIP_DIR_CSV_DATA = "DataIngestionArtifacts"
@@ -20,13 +20,9 @@ SPLIT_TRAIN_TES_DATA = "DataTransformationArtifacts"
 DATA_TRANSFORMATION_DIR = "DataTransformationArtifacts"
 DATA_TRANSFORMATION_FILE = 'cleaned_data.csv'
 COLUMNS_TO_DROP = [
-                'ID',
-                'State',
-                'Zipcode',
-                'OwnerOrganization',
-                'Street',
-                'CertDate',
-                'RegistrationDate'
+                    'CertDate',
+                    'RegistrationDate',
+                    'State'
                 ]
 
 IS_CERTIFIED = 'IsCertified'
@@ -59,11 +55,11 @@ CONVERT_TO_INT = 'PointsAchieved'
 
 LABEL_ENCODER = [
                  
-                'IsCertified',
-                'Isconfidential',
+
                 'UnitOfMeasurement',
                 'City',
-                'ProjectName'
+                'ProjectTypes',
+                'ProjectTypes2'
                  
                  
                  ]
@@ -79,9 +75,9 @@ TARGET_COLUMN = 'CertLevel'
 ONE_HOT_ENCODING = [
                     
                     'Country',
-                    'LEEDSystemVersionDisplayName',
                     'ProjectTypes',
-                    'OwnerTypes'
+                    'OwnerTypes',
+                    'OwnerTypes2'
                     
                     ]
 

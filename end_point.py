@@ -22,24 +22,18 @@ def predict_datapoint():
         return render_template('home.html')
     else:
         data=CustomData(
-            ID=int(request.form.get('ID')),
-            Isconfidential=str(request.form.get('Isconfidential')),
-            ProjectName=str(request.form.get('ProjectName')),
-            Street=str(request.form.get('Street')),
+            
             City=str(request.form.get('City')),
             State=str(request.form.get('State')),
-            Zipcode=int(request.form.get('Zipcode')),
             Country=str(request.form.get('Country')),
-            LEEDSystemVersionDisplayName=str(request.form.get('LEEDSystemVersionDisplayName')),
-            PointsAchieved=int(request.form.get('PointsAchieved')),
             CertDate=str(request.form.get('CertDate')),
-            IsCertified=str(request.form.get('IsCertified')),
             OwnerTypes=str(request.form.get('OwnerTypes')),
+            OwnerTypes2=str(request.form.get('OwnerTypes2')),
             GrossFloorArea=int(request.form.get('GrossFloorArea')),
             UnitOfMeasurement=str(request.form.get('UnitOfMeasurement')),
             TotalPropArea=float(request.form.get('TotalPropArea')),
             ProjectTypes=str(request.form.get('ProjectTypes')),
-            OwnerOrganization=str(request.form.get('OwnerOrganization')),
+            ProjectTypes2=str(request.form.get('ProjectTypes2')),
             RegistrationDate=str(request.form.get('RegistrationDate')),
 
         )

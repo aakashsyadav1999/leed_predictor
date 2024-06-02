@@ -1,90 +1,89 @@
-import pickle
 import pandas as pd
+import pickle
+import os
 
-# Load the pre-trained models and scaler from the pickle file
-model_scaler_path = r'D:\VS code files\upwork_work\Leed_Prediction\leed_predictor_end_end\MODEL_DIR\models_and_scalers.pkl'
-with open(model_scaler_path, "rb") as file:
-    models_and_scalers = pickle.load(file)
+from src.utils.common import save_object, load_object
 
-# Extract models and scaler from the loaded dictionary
-xgb_model_cert = models_and_scalers["xgb_model_cert"]
-xgb_model_points = models_and_scalers["xgb_model_points"]
-rf_model_cert = models_and_scalers["rf_model_cert"]
-scaler = models_and_scalers["scaler"]
+# Sample data
+sample_data = {
+    'ID': [10000000, 10000001, 10000002],
+    'Isconfidential': ['No', 'No', 'No'],
+    'ProjectName': ['PNC Firstside Center', 'Confidential', 'Bethel Commercial Center'],
+    'Street': ['500 First Avenue', 'Confidential', '53 W. Jackson'],
+    'City': ['Pittsburgh', 'Confidential', 'Chicago'],
+    'State': ['PA', 'IN', 'IL'],
+    'Zipcode': ['15219', None, '60604'],  # Handle missing values appropriately
+    'Country': ['IN', 'IN', 'IN'],
+    'LEEDSystemVersionDisplayName': ['LEED FOR SCHOOLS v2009', 'LEED FOR SCHOOLS v2009', 'LEED FOR SCHOOLS v2009'],
+    'PointsAchieved': [33, 33, 45],
+    'CertLevel': ['Certified','Certified','Certified'],
+    'CertDate': ['01-10-2000 00:00', None, '05-11-2007 00:00'],
+    'IsCertified': ['Yes', 'Yes', 'Yes'],
+    'OwnerTypes': ['Corporate: Privately Held', 'Investor: Equity Fund', 'Investor: Bank'],
+    'GrossFloorArea': [647000, 291000, 22592],
+    'UnitOfMeasurement': ['Sq ft', 'Sq ft', 'Sq ft'],
+    'TotalPropArea': [202923, 130637, 27500],
+    'ProjectTypes': ['Retail', 'Retail', 'Retail'],
+    'OwnerOrganization': ['L.D. Astorino Companies', 'Confidential', 'Bethel New Life'],
+    'RegistrationDate': ['31-03-2000 00:00', '01-06-2000 00:00', '01-08-2001 00:00'],
+    
+}
 
-def preprocess_input_data(input_data, scaler, columns_to_scale):
-    """
-    Preprocesses the input data using the loaded scaler.
+# Convert sample data to DataFrame
+sample_df = pd.DataFrame(sample_data)
 
-    Args:
-        input_data (pd.DataFrame): The input data to be preprocessed.
-        scaler (StandardScaler): The scaler used for preprocessing.
-        columns_to_scale (list): List of columns to be scaled.
+# Display column names and types
+print(sample_df.dtypes)
 
-    Returns:
-        pd.DataFrame: The preprocessed input data.
-    """
-    input_data[columns_to_scale] = scaler.transform(input_data[columns_to_scale])
-    return input_data
 
-def predict(input_data):
-    """
-    Predicts the CertLevel and PointsAchieved using the pre-trained models.
+import pickle
 
-    Args:
-        input_data (pd.DataFrame): The input data for prediction.
+# Load the preprocessor from the pickle file
+preprocessor_path = os.path.join('MODEL_DIR','preprocessor.pkl')
+with open(preprocessor_path, 'rb') as f:
+    preprocessor = pickle.load(f)
 
-    Returns:
-        dict: The predicted CertLevel and PointsAchieved.
-    """
-    # Columns to be scaled (adjust as necessary)
-    columns_to_scale = ["PointsAchieved", "GrossFloorArea", "TotalPropArea"]  # Adjust these columns as necessary
 
-    # Preprocess the input data
-    input_data_processed = preprocess_input_data(input_data, scaler, columns_to_scale)
+# Load the model from the pickle file
+model_path = os.path.join('MODEL_DIR','model.pkl')
+with open(model_path, 'rb') as f:
+    model = pickle.load(f)
 
-    # Predict CertLevel using XGBoost classifier
-    cert_predictions_xgb = xgb_model_cert.predict(input_data_processed)
+# Load the saved models and preprocessor
+model_pkl_filepath = os.path.join('MODEL_DIR')
+pickle_file_path = os.path.join(model_pkl_filepath, "model.pkl")
+with open(pickle_file_path, "rb") as pickle_file:
+    saved_object = pickle.load(pickle_file)
 
-    # Predict CertLevel using RandomForest classifier
-    cert_predictions_rf = rf_model_cert.predict(input_data_processed)
 
-    # Predict PointsAchieved using XGBoost regressor
-    points_predictions = xgb_model_points.predict(input_data_processed)
+preprocessor = saved_object['preprocessor']
+model = saved_object['model']
 
-    return {
-        "CertLevel_XGB": cert_predictions_xgb,
-        "CertLevel_RF": cert_predictions_rf,
-        "PointsAchieved": points_predictions
-    }
 
-# Example usage
-if __name__ == "__main__":
-    # Create a DataFrame for the new input data from the given example (replace with actual user input data)
-    new_data = pd.DataFrame({
-        "Isconfidential": ["No"],
-        "ProjectName": ["PNC Firstside Center"],
-        "Street": ["500 First Avenue"],
-        "City": ["Pittsburgh"],
-        "State": ["PA"],
-        "Zipcode": [15219],
-        "Country": ["US"],
-        "LEEDSystemVersionDisplayName": ["LEED-NC 2.0"],
-        "PointsAchieved": [33],
-        "CertLevel": ["Silver"],  # This is usually the target variable, but including it for completeness
-        "CertDate": ["01-10-2000 00:00"],
-        "IsCertified": ["Yes"],
-        "OwnerTypes": ["Profit Org."],
-        "GrossFloorArea": [647000],
-        "UnitOfMeasurement": ["Sq ft"],
-        "TotalPropArea": [202923],
-        "ProjectTypes": ["Commercial Office"],
-        "OwnerOrganization": ["L.D. Astorino Companies"],
-        "RegistrationDate": ["31-03-2000 00:00"]
-    })
+# Print the preprocessor to understand its structure
+print(preprocessor)
+print(model)
 
-    # Predict using the new input data
-    predictions = predict(new_data)
+# Drop the target column 'CertLevel' from the sample data before transformation
+sample_features = sample_df.drop(columns=['CertLevel'])
 
-    # Print the predictions
-    print(predictions)
+# Transform the sample data using the preprocessor
+preprocessed_sample_data = preprocessor.transform(sample_df)
+
+# Convert the transformed data back to a DataFrame if necessary
+preprocessed_sample_data_df = pd.DataFrame(preprocessed_sample_data)
+preprocessed_sample_data_df.to_csv("preprocessed_sample_data_df.csv")
+
+# Save the preprocessed sample data to a CSV file
+preprocessed_sample_data_df.to_csv('preprocessed_sample_data.csv', index=False)
+
+# Predict using the loaded model
+predictions = model.predict(preprocessed_sample_data_df)
+
+# Combine predictions with the sample data
+sample_df['Predictions'] = predictions
+
+# Save the sample data with predictions to a CSV file
+sample_df.to_csv('sample_data_with_predictions.csv', index=False)
+
+print(sample_df)

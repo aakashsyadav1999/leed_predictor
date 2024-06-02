@@ -81,8 +81,9 @@ class DataIngestion:
             csv_file_path = os.path.join(data_directory, csv_files[0])
             df = pd.read_csv(csv_file_path, encoding='latin1', low_memory=False, skipinitialspace=True)
             df['CertLevel'] = df['CertLevel'].replace({'Platinum':1,'Denied':0,'Gold':2,'Certified':3,'Silver':4,'Bronze':5})
-            df.dropna(inplace=True)
+            df.drop(columns=['PointsAchieved'],axis=1,inplace=True)
             df['CertLevel'] = df['CertLevel'].astype(int)
+            df['TotalPropArea'] = df['TotalPropArea'].astype(int)
             df = df.loc[
             
                 (df['Country'] == 'IN') |
@@ -143,6 +144,7 @@ class DataIngestion:
             logging.info(f"Extracted files into directory: {self.data_ingestion_config.unzip_csv_data}")
 
             df=self.read_csv()
+
             
 
             self.split_train_test_split(df)

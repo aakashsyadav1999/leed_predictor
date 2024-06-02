@@ -39,68 +39,49 @@ class PredictPipeline:
 class CustomData:
 
     def __init__ (self,
-                  ID: int,
-                  Isconfidential: str,
-                  ProjectName: str,
-                  Street: str,
                   City: str,
                   State: str,
-                  Zipcode: str,
                   Country: str,
-                  LEEDSystemVersionDisplayName: str,
-                  PointsAchieved: int,
                   CertDate:str,
-                  IsCertified: str,
                   OwnerTypes: str,
+                  OwnerTypes2: str,
                   GrossFloorArea: str,
                   UnitOfMeasurement: str,
                   TotalPropArea: int,
                   ProjectTypes:str,
-                  OwnerOrganization: str,
+                  ProjectTypes2:str,
                   RegistrationDate: str):
         
-        self.ID = ID
-        self.Isconfidential = Isconfidential
-        self.ProjectName = ProjectName
-        self.Street = Street
+
         self.City = City
         self.State = State
-        self.Zipcode = Zipcode
         self.Country = Country
-        self.LEEDSystemVersionDisplayName = LEEDSystemVersionDisplayName
-        self.PointsAchieved = PointsAchieved
         self.CertDate = CertDate
-        self.IsCertified = IsCertified
-        self.OwnerType = OwnerTypes
+        self.OwnerTypes = OwnerTypes
+        self.OwnerTypes2 = OwnerTypes2
         self.GrossFloorArea = GrossFloorArea
         self.UnitOfMeasurement = UnitOfMeasurement
         self.TotalPropArea = TotalPropArea
         self.ProjectTypes = ProjectTypes
-        self.OwnerOrganization = OwnerOrganization
+        self.ProjectTypes2 = ProjectTypes2
         self.RegistrationDate = RegistrationDate
 
     def get_data_as_data_frame(self):
 
         try:
             custom_data_input_dict = {
-                "ID" : [self.ID],
-                "Isconfidential" : [self.Isconfidential],
-                "ProjectName" : [self.ProjectName],
-                "Street" : [self.Street],
+                
                 "City" : [self.City],
                 "State" : [self.State],
-                "Zipcode" : [self.Zipcode],
                 "Country" : [self.Country],
-                "LEEDSystemVersionDisplayName" : [self.LEEDSystemVersionDisplayName],
-                "PointsAchieved" : [self.PointsAchieved],
                 "CertDate" : [self.CertDate],
-                "IsCertified" : [self.IsCertified],
-                "OwnerTypes" : [self.OwnerType],
+                "OwnerTypes" : [self.OwnerTypes],
+                "OwnerTypes2" : [self.OwnerTypes2],
                 "GrossFloorArea" : [self.GrossFloorArea],
                 "UnitOfMeasurement" : [self.UnitOfMeasurement],
                 "TotalPropArea" : [self.TotalPropArea],
                 "ProjectTypes" : [self.ProjectTypes],
-                "OwnerOrganization" : [self.OwnerOrganization],
+                "ProjectTypes2" : [self.ProjectTypes2],
                 "RegistrationDate" : [self.RegistrationDate]
             }
             return pd.DataFrame(custom_data_input_dict)
