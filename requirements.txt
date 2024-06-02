@@ -8,5 +8,4 @@ category_encoders==2.6.3
 imblearn
 gdown
 flask
-
 -e .
