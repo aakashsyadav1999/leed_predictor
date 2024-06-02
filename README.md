@@ -39,3 +39,6 @@
     ```sh
     python main.py
 
+5. **Docker image pull**:
+    '''sh
+    docker pull aakashsyadav1999/leedpredictor
