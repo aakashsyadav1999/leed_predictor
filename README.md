@@ -45,7 +45,6 @@ and sustainability consultants make informed decisions during the design and con
 
 ### Research Files
 - **research/leed_predictor_one.py**: [Exploring dataset]
-- ...
 
 ## Getting Started
  Follow below step for installation and running file on your localhost:
