@@ -68,3 +68,30 @@ and sustainability consultants make informed decisions during the design and con
 5. **Run the application:**
     ```sh
     docker pull aakashsyadav1999/leedpredictor
+
+### Rest API
+
+RUN: python rest_api.py
+
+Open Postman : localhostid (in post method)
+
+Add below credentials in body segment
+
+try : 
+{
+    "City": "Luoyang",
+    "State": "Henan",
+    "Country": "CN",
+    "CertDate": "",
+    "OwnerTypes": "Corporate",
+    "OwnerTypes2": "Privately Held",
+    "GrossFloorArea": 75584.2,
+    "UnitOfMeasurement": "Sq ft",
+    "TotalPropArea": 90384,
+    "ProjectTypes": "Retail",
+    "ProjectTypes2": "Open Shopping Center",
+    "RegistrationDate": ""
+}
+
+
+In your postman.
