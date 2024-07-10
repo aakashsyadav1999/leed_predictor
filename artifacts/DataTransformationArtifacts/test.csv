@@ -1,0 +1,164 @@
+City,State,Country,CertLevel,CertDate,RegistrationDate,OwnerTypes,OwnerTypes2,GrossFloorArea,UnitOfMeasurement,TotalPropArea,ProjectTypes,ProjectTypes2
+Beijing,Beijing,CN,2,27-03-2012 00:00,24-01-2011 00:00,Corporate,Privately Held,7497.8,Sq ft,13235,Office,Government
+Shanghai,Shanghai,CN,2,18-09-2013 00:00,27-08-2012 00:00,Corporate,Publicly Traded,2863832.48,Sq ft,254146,Office,Financial
+Beijing,Beijing,CN,2,22-12-2015 00:00,22-07-2012 00:00,Corporate,Publicly Traded,66668.65,Sq ft,90471,Office,Administrative/Professional
+Tianjin,Tianjin,CN,2,08-01-2014 00:00,03-11-2011 00:00,Corporate,Publicly Traded,112773.49,Sq ft,198232,Office,Government
+Suzhou,Jiangsu,CN,2,16-06-2019 00:00,27-02-2014 00:00,Corporate,Publicly Traded,504903.0,Sq ft,438016,Public Assembly,Other
+Wuhan,Hubei,CN,2,07-11-2023 00:00,15-05-2013 00:00,Investor," REIT,Non-traded",2475720.0,Sq ft,236053,Office,Other Office
+Beijing,Beijing,CN,1,17-01-2018 00:00,05-01-2013 00:00,Corporate,Privately Held,41372.0,Sq ft,17149,Multi-Family Residential,Other
+Shanghai,Shanghai,CN,2,06-04-2013 00:00,05-04-2011 00:00,Corporate,Publicly Traded,165013.0,Sq ft,183159,Office,Other Office
+Seoul,Soul-t?ukpyolsi,KR,2,02-12-2014 00:00,01-05-2014 00:00,Corporate,Privately Held,1135374.11,Sq ft,75590,Office,Government
+Bekasi,Jawa Barat West Java,ID,4,27-05-2015 00:00,29-09-2013 00:00,Corporate,Publicly Traded,46543.0,Sq ft,72793,Office,Financial
+Beijing,Beijing,CN,4,09-07-2013 00:00,16-11-2009 00:00,Investor," REIT, Publicly traded",69118.0,Sq ft,56802,Office,Administrative/Professional
+Shanghai,Shanghai,CN,2,08-06-2017 00:00,31-12-2011 00:00,Corporate,Publicly Traded,52318.0,Sq ft,50962,Office,Financial
+Shanghai,Shanghai,CN,2,18-11-2020 00:00,23-08-2011 00:00,Corporate,Privately Held,953564.0,Sq ft,148005,Office,Government
+Sanya,Hainan,CN,4,30-10-2020 00:00,28-07-2015 00:00,Corporate,Privately Held,550327.0,Sq ft,445274,Lodging,Other
+Shenzhen,Guangdong,CN,2,17-06-2019 00:00,24-12-2013 00:00,Corporate,Publicly Traded,999769.0,Sq ft,397119,Retail,Restaurant/Cafeteria
+Guangzhou,Guangdong,CN,4,25-06-2019 00:00,19-05-2013 00:00,Corporate,Publicly Traded,1693403.44,Sq ft,934477,Office,Mixed-Use
+Suzhou,Jiangsu,CN,4,23-11-2011 00:00,20-09-2010 00:00,Corporate,Publicly Traded,106673.0,Sq ft,323583,Industrial Manufacturing,Other
+Kunshan,Jiangsu,CN,2,22-04-2014 00:00,15-07-2011 00:00,Corporate,Privately Held,239388.0,Sq ft,394820,Industrial Manufacturing,Other
+Shanghai,Shanghai,CN,2,14-12-2017 00:00,21-09-2015 00:00,Government Use," Local, City",364469.0,Sq ft,258850,Office,Financial
+Changsha,Hunan,CN,2,04-06-2014 00:00,02-05-2011 00:00,Corporate,Publicly Traded,864920.0,Sq ft,58674,Office,Administrative/Professional
+Hangzhou,Zhejiang,CN,4,06-11-2018 00:00,03-09-2013 00:00,Corporate,Privately Held,283710.0,Sq ft,227778,Office,Financial
+Nanjing,Jiangsu,CN,2,28-10-2016 00:00,26-03-2014 00:00,Government Use," Local, City",58709.0,Sq ft,101753,Office,Administrative/Professional
+Shanghai,Shanghai,CN,3,07-12-2019 00:00,26-07-2015 00:00,Corporate,Publicly Traded,477756.0,Sq ft,114820,Office,Government
+Beijing,Beijing,CN,2,06-01-2016 00:00,14-12-2011 00:00,Corporate,Publicly Traded,314644.2,Sq ft,73520,Office,Other Office
+Mumbai,Maharashtra,IN,2,20-12-2011 00:00,12-06-2009 00:00,Investor,Bank,85961.0,Sq ft,33507,Retail,Open Shopping Center
+Tianjin,Tianjin,CN,2,12-06-2018 00:00,01-06-2015 00:00,Corporate,Privately Held,362797.0,Sq ft,579039,Industrial Manufacturing,Other
+Wuhan,Hubei,CN,2,03-07-2016 00:00,24-10-2011 00:00,Corporate,Publicly Traded,183449.0,Sq ft,113559,Data Center,Other
+Shanghai,Shanghai,CN,1,27-09-2012 00:00,25-09-2011 00:00,Investor,Investment Manager,319634.0,Sq ft,21646,Office,Financial
+Kunshan,Jiangsu,CN,2,26-07-2016 00:00,07-09-2015 00:00,Corporate,Privately Held,651023.0,Sq ft,704949,Warehouse,Nonrefrigerated Distribution/Shipping
+Beijing,Beijing,CN,2,13-09-2020 00:00,24-10-2013 00:00,Corporate,Privately Held,857432.12,Sq ft,100824,Office,Administrative/Professional
+Kuala Lumpur,KUL,MY,2,16-10-2017 00:00,13-07-2011 00:00,Corporate,Publicly Traded,356951.0,Sq ft,278784,Office,Government
+Shanghai,Shanghai,CN,1,14-02-2017 00:00,16-06-2015 00:00,Investor,Insurance Company,949288.0,Sq ft,116380,Office,Government
+Singapore,SG,SG,2,27-09-2016 00:00,31-10-2014 00:00,Investor," REIT,Non-traded",931851.0,Sq ft,638186,Warehouse,General
+Beijing,Beijing,CN,2,01-11-2016 00:00,22-12-2015 00:00,Corporate,Privately Held,1365151.0,Sq ft,362878,Office,Mixed-Use
+Shanghai,Shanghai,CN,2,18-11-2014 00:00,23-08-2013 00:00,Corporate,Privately Held,437280.0,Sq ft,54674,Office,Government
+Beijing,Beijing,CN,2,28-01-2022 00:00,24-12-2012 00:00,Investor,Insurance Company,1207592.0,Sq ft,0,Office,Other Office
+Suzhou,Jiangsu,CN,1,08-03-2017 00:00,17-09-2012 00:00,Corporate,Privately Held,147629.4,Sq ft,213391,Office,Administrative/Professional
+New Delhi,Delhi,IN,1,19-12-2010 00:00,09-07-2010 00:00,Corporate,Publicly Traded,680793.0,Sq ft,282097,Lodging,Other
+Settsu,Osaka-fu,JP,1,22-07-2016 00:00,24-03-2014 00:00,Corporate,Publicly Traded,514009.0,Sq ft,311125,Office,Mixed-Use
+New Delhi,Delhi,IN,2,20-10-2012 00:00,28-04-2012 00:00,Community Development Corporation o,Others,35594.0,Sq ft,20822,Office,Mixed-Use
+Beijing,Beijing,CN,2,29-09-2016 00:00,01-08-2011 00:00,Investor,Investment Manager,542591.0,Sq ft,96482,Office,Mixed-Use
+Qing Dao,Shandong,CN,2,10-12-2018 00:00,22-05-2013 00:00,Corporate,Privately Held,1222559.35,Sq ft,25964,Office,Other Office
+Suzhou,Jiangsu,CN,2,27-12-2016 00:00,11-07-2012 00:00,Corporate,Privately Held,37617.61,Sq ft,32048,Office,Other Office
+Nanchang,Jiangxi,CN,4,06-03-2017 00:00,09-10-2013 00:00,Corporate,Publicly Traded,2342539.0,Sq ft,3323259,Office,Administrative/Professional
+Wuhan,Hubei,CN,2,07-10-2022 00:00,08-06-2013 00:00,Corporate,Privately Held,473244.38,Sq ft,602946,Office,Government
+Shanghai,Shanghai,CN,1,17-02-2019 00:00,09-03-2015 00:00,Corporate,Publicly Traded,538185.0,Sq ft,108969,Office,Government
+Kunshan,Jiangsu,CN,2,29-11-2017 00:00,13-08-2012 00:00,Government Use," Local, City",393039.0,Sq ft,181684,Public Assembly,Other
+Gurgaon,Haryana,IN,2,16-05-2013 00:00,25-10-2011 00:00,Corporate,Publicly Traded,658465.2,Sq ft,96736,Office,Other Office
+Shanghai,Shanghai,CN,2,06-07-2020 00:00,05-09-2014 00:00,Corporate,Privately Held,3558168.3,Sq ft,436771,Office,Administrative/Professional
+Singapore,SG,SG,1,01-05-2018 00:00,03-09-2012 00:00,Corporate,Privately Held,2242925.64,Sq ft,183768,Office,Financial
+Xiamen,Fujian,CN,2,20-09-2016 00:00,29-08-2013 00:00,Investor,Investment Manager,565683.0,Sq ft,26233,Office,Government
+Kunshan,Jiangsu,CN,4,24-03-2020 00:00,03-11-2010 00:00,Government Use," Local, City",191682.0,Sq ft,1582046,Office,Government
+Xiamen City,Fujian,CN,2,18-07-2016 00:00,19-09-2012 00:00,Investor,Investment Manager,541747.0,Sq ft,23848,Office,Mixed-Use
+Beijing,Beijing,CN,1,28-08-2016 00:00,01-11-2015 00:00,Corporate,Privately Held,1480653.0,Sq ft,301390,Office,Government
+Shanghai,Shanghai,CN,4,21-08-2016 00:00,28-05-2012 00:00,Corporate,Publicly Traded,42440.0,Sq ft,42464,Office,Government
+Shanghai,Shanghai,CN,2,29-09-2020 00:00,23-11-2015 00:00,Corporate,Privately Held,165727.0,Sq ft,82839,Office,Financial
+Beijing,Beijing,CN,1,04-01-2018 00:00,05-01-2013 00:00,Corporate,Privately Held,47117.0,Sq ft,26854,Multi-Family Residential,Other
+Qingpu,Shanghai,CN,2,24-05-2017 00:00,28-04-2015 00:00,Corporate,Publicly Traded,117994.0,Sq ft,159259,Office,Other Office
+Shanghai,Shanghai,CN,2,29-04-2011 00:00,10-09-2009 00:00,Government Use," Local, City",2026778.0,Sq ft,337341,Office,Mixed-Use
+DEHRADUN,Uttaranchal,IN,1,30-03-2015 00:00,26-10-2012 00:00,Corporate,Privately Held,239951.3,Sq ft,876036,Lodging,Other
+Singapore,SG,SG,2,14-05-2017 00:00,08-09-2015 00:00,Corporate,Privately Held,69872.0,Sq ft,66120,Warehouse,Refrigerated
+Shenzhen,Guangdong,CN,2,25-12-2019 00:00,17-11-2013 00:00,Investor,Investment Manager,1430051.56,Sq ft,110232,Office,Government
+Mumbai,Maharashtra,IN,2,31-01-2013 00:00,25-08-2011 00:00,Corporate,Publicly Traded,228852.0,Sq ft,69439,Office,Administrative/Professional
+Beijing,Beijing,CN,2,21-12-2011 00:00,08-06-2011 00:00,Corporate,Publicly Traded,1582300.0,Sq ft,233140,Office,Other Office
+Navi Mumbai,Maharashtra,IN,2,25-11-2013 00:00,29-02-2012 00:00,Corporate,Publicly Traded,104863.62,Sq ft,127022,Office,Financial
+Shanghai,Shanghai,CN,2,18-09-2019 00:00,23-08-2011 00:00,Corporate,Publicly Traded,95705.0,Sq ft,78692,Office,Administrative/Professional
+Kunshan,Jiangsu,CN,4,13-02-2016 00:00,03-11-2010 00:00,Educational," University, Public",24980.0,Sq ft,98797,Lodging,Other
+Hangzhou,Zhejiang,CN,2,30-05-2019 00:00,16-04-2013 00:00,Corporate,Publicly Traded,486526.0,Sq ft,91497,Office,Administrative/Professional
+Takatsuki-city,Osaka-fu,JP,2,21-09-2017 00:00,29-11-2015 00:00,Corporate,Publicly Traded,668109.68,Sq ft,379710,Warehouse,General
+Beijing,Beijing,CN,2,15-04-2018 00:00,16-12-2015 00:00,Corporate,Privately Held,86252.0,Sq ft,68791,Public Assembly,Other
+Singapore,SG,SG,1,07-09-2018 00:00,15-12-2011 00:00,Corporate,Publicly Traded,1226315.41,Sq ft,224624,Office,Mixed-Use
+Shenzhen,Guangdong,CN,2,16-08-2011 00:00,23-12-2009 00:00,Corporate,Privately Held,323077.0,Sq ft,128755,Office,Mixed-Use
+Guian New Area,Guizhou,CN,1,24-07-2015 00:00,20-05-2014 00:00,Corporate,Publicly Traded,294275.0,Sq ft,337573,Industrial Manufacturing,Other
+Shanghai,Shanghai,CN,2,10-07-2016 00:00,12-12-2014 00:00,Government Use," Local, City",40851.0,Sq ft,52472,Office,Government
+Tianjin,Tianjin,CN,3,05-02-2016 00:00,11-03-2014 00:00,Corporate,Publicly Traded,174956.0,Sq ft,475818,Industrial Manufacturing,Other
+Beijing,Beijing,CN,1,25-10-2017 00:00,28-12-2012 00:00,Corporate,Privately Held,30282.0,Sq ft,19136,Multi-Family Residential,Other
+Shanghai,Shanghai,CN,2,04-09-2016 00:00,12-12-2014 00:00,Government Use," Local, City",42383.0,Sq ft,40425,Office,Administrative/Professional
+Navi Mumbai,Maharashtra,IN,2,30-08-2016 00:00,24-07-2015 00:00,Corporate,Privately Held,354741.68,Sq ft,1703163,Office,Other Office
+Chuncheon,Kangwon-do,KR,1,22-05-2013 00:00,20-07-2011 00:00,Corporate,Privately Held,519833.88,Sq ft,545367,Datacenter,Other
+Bandar Penawar,JOH,MY,4,02-08-2021 00:00,23-10-2013 00:00,Corporate,Privately Held,415273.28,Sq ft,481426,Lodging,Other
+Shanghai,Shanghai,CN,2,15-05-2014 00:00,18-01-2012 00:00,Corporate,Privately Held,213216.0,Sq ft,106084,Office,Administrative/Professional
+Tianjin,Tianjin,CN,4,11-04-2012 00:00,02-03-2011 00:00,Corporate,Publicly Traded,855730.0,Sq ft,109124,Office,Administrative/Professional
+Shanghai,Shanghai,CN,2,23-12-2016 00:00,30-11-2012 00:00,Corporate,Publicly Traded,488250.97,Sq ft,92634,Office,Administrative/Professional
+Hangzhou,Zhejiang,CN,3,20-11-2018 00:00,28-07-2015 00:00,Investor,Investment Manager,501241.9,Sq ft,96337,Office,Mixed-Use
+Shanghai,Shanghai,CN,2,29-11-2018 00:00,08-07-2014 00:00,Corporate,Privately Held,1058504.0,Sq ft,157947,Office,Mixed-Use
+Harbin,Heilongjiang,CN,4,20-11-2017 00:00,08-04-2014 00:00,Investor,Investment Manager,3965554.36,Sq ft,2072053,Public Assembly,Other
+Shanghai,Shanghai,CN,2,18-05-2016 00:00,10-05-2015 00:00,Corporate,Privately Held,1122869.0,Sq ft,257003,Office,Financial
+Beijing,Beijing,CN,2,24-08-2016 00:00,30-08-2012 00:00,Corporate,Privately Held,1239332.0,Sq ft,710612,Office,Administrative/Professional
+Changchun,Jilin,CN,3,18-07-2016 00:00,04-06-2013 00:00,Corporate,Privately Held,85235.0,Sq ft,51667,Office,Mixed-Use
+Shanghai,Shanghai,CN,2,22-12-2013 00:00,03-08-2011 00:00,Corporate,Publicly Traded,670585.0,Sq ft,358976,Office,Mixed-Use
+Beijing,Beijing,CN,3,28-10-2015 00:00,10-09-2013 00:00,Investor,Investment Manager,645616.0,Sq ft,539412,Office,Other Office
+Beijing,Beijing,CN,2,16-02-2020 00:00,28-04-2015 00:00,Corporate,Privately Held,777138.6,Sq ft,286588,Multi-Family Residential,Other
+Bangalore,Karnataka,IN,4,30-03-2012 00:00,11-11-2009 00:00,Government Use," Other (utility, airport,",782574.72,Sq ft,5950680,Service,Other
+Chiba,Chiba-ken,JP,2,02-03-2015 00:00,28-02-2013 00:00,Corporate,Publicly Traded,759519.5,Sq ft,711237,Retail,Open Shopping Center
+Tianjin,Tianjin,CN,4,24-07-2012 00:00,08-09-2010 00:00,Government Use," Other (utility, airport,",153987.0,Sq ft,222399,Industrial Manufacturing,Other
+MUMBAI,Maharashtra,IN,1,25-03-2011 00:00,27-07-2010 00:00,Corporate,Publicly Traded,660903.0,Sq ft,268859,Lodging,Other
+Jiaxing,Zhejiang,CN,2,10-11-2014 00:00,04-11-2013 00:00,Corporate,Publicly Traded,27613.0,Sq ft,25360,Office,Other Office
+Chongqing,Sichuan,CN,4,22-04-2019 00:00,04-07-2012 00:00,Corporate,Privately Held,1450703.0,Sq ft,150630,Office,Mixed-Use
+Beijing,Beijing,CN,1,30-09-2019 00:00,30-08-2011 00:00,Corporate,Privately Held,282200.0,Sq ft,177385,Public Assembly,Other
+Chengdu,Sichuan,CN,2,23-08-2013 00:00,03-02-2012 00:00,Corporate,Publicly Traded,245805.09,Sq ft,378748,Industrial Manufacturing,Other
+Shanghai,Shanghai,CN,2,13-03-2014 00:00,18-01-2012 00:00,Corporate,Privately Held,373923.0,Sq ft,116248,Office,Administrative/Professional
+Shanghai,Shanghai,CN,4,25-10-2017 00:00,28-03-2012 00:00,Corporate,Publicly Traded,127973.0,Sq ft,239194,Industrial Manufacturing,Other
+Hangzhou,Zhejiang,CN,2,04-12-2016 00:00,15-11-2013 00:00,Corporate,Publicly Traded,412245.56,Sq ft,99857,Office,Other Office
+Qingdao,Shandong,CN,2,09-05-2023 00:00,05-06-2015 00:00,Corporate,Privately Held,176481.0,Sq ft,200071,Public Assembly,Other
+Chongqing,Chongqing,CN,2,08-09-2017 00:00,10-07-2012 00:00,Corporate,Privately Held,984672.2,Sq ft,117209,Office,Mixed-Use
+Nanjing,Jiangsu,CN,2,08-05-2017 00:00,02-03-2011 00:00,Corporate,Privately Held,728453.0,Sq ft,190553,Office,Mixed-Use
+Yangzhou,Jiangsu,CN,4,02-12-2013 00:00,18-04-2011 00:00,Corporate,Publicly Traded,603709.0,Sq ft,300405,Lodging,Other
+Shanghai,Shanghai,CN,2,08-11-2017 00:00,12-04-2013 00:00,Corporate,Publicly Traded,637240.0,Sq ft,120374,Office,Other Office
+Chengdu,Sichuan,CN,4,09-02-2020 00:00,07-03-2014 00:00,Corporate,Privately Held,2456200.0,Sq ft,199279,Office,Administrative/Professional
+Shanghai,Shanghai,CN,2,04-09-2016 00:00,12-12-2014 00:00,Government Use," Local, City",58190.0,Sq ft,56358,Office,Financial
+Kunshan,Jiangsu,CN,4,05-08-2014 00:00,03-05-2013 00:00,Corporate,Publicly Traded,555363.84,Sq ft,1007083,Warehouse and Distribution Center,Refrigerated
+Singapore,SG,SG,2,11-07-2013 00:00,13-05-2011 00:00,Corporate,Privately Held,453311.0,Sq ft,226656,Warehouse and Distribution Center,Nonrefrigerated Distribution/Shipping
+Hyderabad,Andra Pradesh,IN,4,02-06-2016 00:00,26-05-2013 00:00,Corporate,Publicly Traded,315226.0,Sq ft,2489269,Warehouse,General
+BEIJING,Beijing,CN,2,24-02-2016 00:00,21-06-2012 00:00,Investor,Investment Manager,718538.0,Sq ft,50074,Office,Administrative/Professional
+Kulim,KED,MY,4,03-10-2011 00:00,29-07-2010 00:00,Corporate,Publicly Traded,305252.37,Sq ft,612052,Industrial Manufacturing,Other
+Changsha,Hunan,CN,2,10-02-2014 00:00,27-12-2011 00:00,Corporate,Publicly Traded,163632.0,Sq ft,168089,Core Learning Space,Other
+Pune,Maharashtra,IN,2,11-05-2011 00:00,20-07-2009 00:00,Corporate,Privately Held,321132.0,Sq ft,146464,Office,Government
+Tianjin,Tianjin,CN,3,18-03-2013 00:00,09-09-2011 00:00,Corporate,Publicly Traded,181965.0,Sq ft,111795,Office,Other Office
+Kunming,Yunnan,CN,2,19-03-2018 00:00,08-11-2015 00:00,Corporate,Publicly Traded,719844.0,Sq ft,2105770,Industrial Manufacturing,Other
+Beijing,Beijing,CN,2,11-08-2014 00:00,23-07-2013 00:00,Investor," REIT,Non-traded",1437195.0,Sq ft,321266,Office,Administrative/Professional
+Xian,Shanxi,CN,3,27-04-2017 00:00,15-04-2014 00:00,Investor,Investment Manager,493307.44,Sq ft,232398,Office,Financial
+Seongnam,Kyonggi-do,KR,1,26-09-2014 00:00,16-09-2013 00:00,Corporate,Privately Held,779685.0,Sq ft,71042,Office,Administrative/Professional
+Beijing,Beijing,CN,2,08-12-2011 00:00,16-08-2010 00:00,Investor," REIT, Publicly traded",1009214.0,Sq ft,105572,Office,Government
+Dalian,Liaoning,CN,2,18-07-2016 00:00,17-09-2013 00:00,Corporate,Privately Held,154472.0,Sq ft,137594,Data Center,Other
+Bangalore,Karnataka,IN,1,01-08-2017 00:00,30-05-2014 00:00,Corporate,Publicly Traded,626305.0,Sq ft,768070,Office,Mixed-Use
+Tianjin,Tianjin,CN,2,04-12-2018 00:00,24-10-2012 00:00,Corporate,Privately Held,1587279.0,Sq ft,36059,Office,Mixed-Use
+Harbin,Heilongjiang,CN,4,25-09-2016 00:00,19-03-2014 00:00,Corporate,Privately Held,606659.0,Sq ft,2152782,Industrial Manufacturing,Other
+Xian,Shaanxi,CN,4,18-03-2021 00:00,29-03-2013 00:00,Investor,Individual/Family,1517526.0,Sq ft,224395,Office,Government
+Beijing,Beijing,CN,2,27-05-2016 00:00,09-09-2013 00:00,Corporate,Privately Held,2855061.6,Sq ft,297291,Office,Financial
+Chennai,Tamil Nadu,IN,2,18-05-2018 00:00,25-07-2011 00:00,Government Use," Local, City",92312.0,Sq ft,242385,Office,Mixed-Use
+Hangzhou,Zhejiang,CN,2,06-02-2014 00:00,08-04-2011 00:00,Corporate,Publicly Traded,404414.6,Sq ft,115487,Office,Mixed-Use
+Shanghai,Shanghai,CN,2,13-03-2023 00:00,07-06-2013 00:00,Corporate,Privately Held,538200.0,Sq ft,195560,Office,Government
+Bangalore,Karnataka,IN,1,13-04-2016 00:00,21-07-2014 00:00,Corporate,Publicly Traded,511548.0,Sq ft,152444,Office,Financial
+Wuhan,Hubei,CN,1,07-05-2015 00:00,06-03-2014 00:00,Corporate,Privately Held,117316.0,Sq ft,516800,Office,Government
+Shanghai,Shanghai,CN,2,01-12-2016 00:00,21-01-2013 00:00,Corporate,Privately Held,311394.65,Sq ft,114155,Office,Mixed-Use
+ShenZhen,Guangdong,CN,2,12-12-2018 00:00,20-10-2014 00:00,Corporate,Publicly Traded,272800.0,Sq ft,51024,Office,Financial
+Hangzhou,Zhejiang,CN,3,14-12-2012 00:00,25-07-2012 00:00,Government Use," Local, City",334036.0,Sq ft,352819,Office,Administrative/Professional
+Guangzhou,Guangdong,CN,4,21-09-2013 00:00,03-01-2012 00:00,Corporate,Publicly Traded,375182.8,Sq ft,505904,Industrial Manufacturing,Other
+Hyderabad,Andra Pradesh,IN,2,03-03-2016 00:00,25-10-2012 00:00,Corporate,Publicly Traded,34169.67,Sq ft,38892,Office,Financial
+Mumbai,Maharashtra,IN,2,16-09-2015 00:00,28-01-2008 00:00,Profit Org.,Others,184428.0,Sq ft,69423,Commercial Office,Other Office
+Beijing,Beijing,CN,2,16-12-2016 00:00,26-11-2013 00:00,Corporate,Publicly Traded,532728.03,Sq ft,43401,Office,Other Office
+Guangzhou,Guangdong,CN,2,24-08-2012 00:00,07-10-2010 00:00,Corporate,Privately Held,654220.0,Sq ft,17090,Office,Financial
+Zhoukou,Henan,CN,3,06-08-2014 00:00,11-11-2012 00:00,Corporate,Publicly Traded,346043.68,Sq ft,917830,Warehouse and Distribution Center,General
+Shanghai,Shanghai,CN,4,14-12-2010 00:00,04-11-2009 00:00,Government Use," Local, City",192706.0,Sq ft,2092364,Office,Government
+Beijing,Beijing,CN,1,13-12-2017 00:00,05-01-2013 00:00,Corporate,Privately Held,105165.0,Sq ft,26540,Multi-Family Residential,Other
+Hangzhou,Zhejiang,CN,3,07-07-2016 00:00,18-06-2015 00:00,Corporate,Privately Held,399186.0,Sq ft,1054304,Industrial Manufacturing,Other
+Beijing,Beijing,CN,4,21-10-2018 00:00,08-05-2013 00:00,Corporate,Publicly Traded,44153.58,Sq ft,25695,Office,Financial
+Suzhou,Jiangsu,CN,1,17-08-2016 00:00,21-07-2015 00:00,Corporate,Publicly Traded,107903.0,Sq ft,142407,Other,Other
+Singapore,SG,SG,2,07-09-2018 00:00,26-12-2011 00:00,Corporate,Publicly Traded,171311.02,Sq ft,224624,Lodging,Other
+Asan City,Ch?ungch?ong-namdo,KR,4,29-04-2014 00:00,24-09-2013 00:00,Corporate,Privately Held,94393.0,Sq ft,173799,Core Learning Space,Other
+Shenzhen,Guangdong,CN,2,18-12-2017 00:00,08-07-2014 00:00,Investor,Investment Manager,822896.0,Sq ft,79041,Office,Financial
+Singapore,SG,SG,2,26-08-2013 00:00,15-05-2011 00:00,Investor,Bank,118629.0,Sq ft,81022,Office,Administrative/Professional
+Chittoor District,Andra Pradesh,IN,2,30-11-2017 00:00,24-03-2015 00:00,Corporate,Privately Held,41914.0,Sq ft,87069,Other,Other
+Shanghai,Shanghai,CN,4,14-12-2010 00:00,04-11-2009 00:00,Government Use," Local, City",124474.0,Sq ft,2092364,Office,Government
+Lang Fang,Hebei,CN,4,07-01-2022 00:00,01-09-2014 00:00,Corporate,Privately Held,1603185.0,Sq ft,1031134,Public Assembly,Other
+Ningbo,Zhejiang,CN,2,27-04-2022 00:00,03-09-2014 00:00,Corporate,Privately Held,1256348.0,Sq ft,158527,Office,Administrative/Professional
+Kulim,KED,MY,2,05-08-2013 00:00,17-05-2012 00:00,Corporate,Publicly Traded,302286.0,Sq ft,551495,Office,Other Office
+Kunming,Yunnan,CN,4,03-04-2018 00:00,16-08-2011 00:00,Corporate,Privately Held,1276521.49,Sq ft,214933,Office,Other Office
+Shanghai,Shanghai,CN,3,14-04-2010 00:00,25-10-2009 00:00,Corporate,Privately Held,452286.0,Sq ft,463477,Warehouse and Distribution Center,General
+Shenzhen,Guangdong,CN,2,23-12-2020 00:00,02-11-2011 00:00,Corporate,Privately Held,676976.0,Sq ft,74639,Office,Other Office
+Shanghai,Shanghai,CN,2,01-12-2019 00:00,06-12-2015 00:00,Corporate,Publicly Traded,176509.0,Sq ft,0,Office,Administrative/Professional
+Pudong New District,Shanghai,CN,2,17-12-2017 00:00,29-01-2015 00:00,Corporate,Publicly Traded,700198.0,Sq ft,223076,Office,Government
+Guangzhou,Guangdong,CN,2,10-05-2018 00:00,02-12-2013 00:00,Corporate,Privately Held,377612.0,Sq ft,40903,Lodging,Other
